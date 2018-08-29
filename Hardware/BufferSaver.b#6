@@ -2299,6 +2299,37 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </package>
 </packages>
 </library>
+<library name="SparkFun-Jumpers">
+<description>&lt;h3&gt;SparkFun Jumpers&lt;/h3&gt;
+In this library you'll find jumpers, or other semipermanent means of changing current paths. The least permanent form is the solder jumper. These can be changed by adding, removing, or moving solder. In cases that are less likely to be changed we have jumpers that are connected with traces. These can be cut with a razor, or reconnected with solder. Reference designator JP.
+&lt;br&gt;
+&lt;br&gt;
+We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
+&lt;br&gt;
+&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
+&lt;br&gt;
+&lt;br&gt;
+You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
+<packages>
+<package name="SMT-JUMPER_2_NO_SILK">
+<text x="0" y="1.143" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;NAME</text>
+<text x="0" y="-1.143" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;VALUE</text>
+<wire x1="0.8636" y1="-1.016" x2="-0.8636" y2="-1.016" width="0.1524" layer="21"/>
+<wire x1="0.8636" y1="1.016" x2="1.1176" y2="0.762" width="0.1524" layer="21" curve="-90"/>
+<wire x1="-1.1176" y1="0.762" x2="-0.8636" y2="1.016" width="0.1524" layer="21" curve="-90"/>
+<wire x1="-1.1176" y1="-0.762" x2="-0.8636" y2="-1.016" width="0.1524" layer="21" curve="90"/>
+<wire x1="0.8636" y1="-1.016" x2="1.1176" y2="-0.762" width="0.1524" layer="21" curve="90"/>
+<wire x1="1.1176" y1="-0.762" x2="1.1176" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="-1.1176" y1="-0.762" x2="-1.1176" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="-0.8636" y1="1.016" x2="0.8636" y2="1.016" width="0.1524" layer="21"/>
+<smd name="1" x="-0.4064" y="0" dx="0.635" dy="1.27" layer="1" cream="no"/>
+<smd name="2" x="0.4064" y="0" dx="0.635" dy="1.27" layer="1" cream="no"/>
+</package>
+</packages>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -2504,23 +2535,26 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </element>
 <element name="U$7" library="buzzard_labels" package="MAX5V8" value="" x="3.1242" y="0.4318" rot="MR90"/>
 <element name="U$9" library="buzzard_labels" package="MAX5V8" value="" x="7.747" y="10.8712" rot="MR0"/>
+<element name="JP1" library="SparkFun-Jumpers" package="SMT-JUMPER_2_NO_SILK" value="JUMPER-SMT_2_NO_SILK" x="3.302" y="5.08" rot="R90"/>
 </elements>
 <signals>
 <signal name="GND">
 <contactref element="J1" pad="1"/>
 <contactref element="J2" pad="5"/>
 <contactref element="U1" pad="3"/>
-<wire x1="2.921" y1="1.27" x2="1.27" y2="1.27" width="0.508" layer="1"/>
-<wire x1="11.43" y1="1.27" x2="2.921" y2="1.27" width="0.508" layer="1"/>
+<wire x1="11.43" y1="1.27" x2="3.302" y2="1.27" width="0.508" layer="1"/>
 <polygon width="0.6096" layer="1">
 <vertex x="0" y="12.7"/>
 <vertex x="12.7" y="12.7"/>
 <vertex x="12.7" y="0"/>
 <vertex x="0" y="0"/>
 </polygon>
-<wire x1="5.0499" y1="4.13" x2="3.495" y2="4.13" width="0.508" layer="1"/>
-<wire x1="3.495" y1="4.13" x2="2.921" y2="3.556" width="0.508" layer="1"/>
-<wire x1="2.921" y1="3.556" x2="2.921" y2="1.27" width="0.508" layer="1"/>
+<contactref element="JP1" pad="1"/>
+<wire x1="3.302" y1="1.27" x2="1.27" y2="1.27" width="0.508" layer="1"/>
+<wire x1="3.302" y1="4.6736" x2="3.302" y2="4.064" width="0.508" layer="1"/>
+<wire x1="3.302" y1="4.064" x2="3.302" y2="1.27" width="0.508" layer="1"/>
+<wire x1="5.0499" y1="4.13" x2="3.368" y2="4.13" width="0.508" layer="1"/>
+<wire x1="3.368" y1="4.13" x2="3.302" y2="4.064" width="0.508" layer="1"/>
 </signal>
 <signal name="5V">
 <contactref element="J1" pad="5"/>
@@ -2548,35 +2582,39 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <contactref element="J1" pad="4"/>
 <contactref element="J2" pad="2"/>
 <contactref element="U1" pad="1"/>
-<wire x1="1.27" y1="8.89" x2="3.81" y2="8.89" width="0.508" layer="1"/>
-<wire x1="3.81" y1="8.89" x2="11.43" y2="8.89" width="0.508" layer="1"/>
-<wire x1="5.0499" y1="6.03" x2="4.13" y2="6.03" width="0.508" layer="1"/>
-<wire x1="4.13" y1="6.03" x2="3.81" y2="6.35" width="0.508" layer="1"/>
-<wire x1="3.81" y1="6.35" x2="3.81" y2="7.62" width="0.508" layer="1"/>
+<wire x1="1.27" y1="8.89" x2="3.302" y2="8.89" width="0.508" layer="1"/>
+<wire x1="3.302" y1="8.89" x2="11.43" y2="8.89" width="0.508" layer="1"/>
 <contactref element="R1" pad="1"/>
-<wire x1="3.81" y1="7.62" x2="3.81" y2="8.89" width="0.508" layer="1"/>
-<wire x1="5.5" y1="7.62" x2="3.81" y2="7.62" width="0.508" layer="1"/>
+<contactref element="JP1" pad="2"/>
+<wire x1="3.302" y1="5.4864" x2="3.302" y2="5.969" width="0.508" layer="1"/>
+<wire x1="3.302" y1="5.969" x2="3.302" y2="7.62" width="0.508" layer="1"/>
+<wire x1="3.302" y1="7.62" x2="3.302" y2="8.89" width="0.508" layer="1"/>
+<wire x1="5.0499" y1="6.03" x2="3.363" y2="6.03" width="0.508" layer="1"/>
+<wire x1="3.363" y1="6.03" x2="3.302" y2="5.969" width="0.508" layer="1"/>
+<wire x1="5.5" y1="7.62" x2="3.302" y2="7.62" width="0.508" layer="1"/>
 </signal>
 <signal name="MOSI">
 <contactref element="J1" pad="3"/>
 <contactref element="U1" pad="2"/>
 <contactref element="J2" pad="3"/>
-<wire x1="5.0499" y1="5.08" x2="2.54" y2="5.08" width="0.508" layer="1"/>
-<wire x1="2.54" y1="5.08" x2="1.27" y2="6.35" width="0.508" layer="1"/>
-<wire x1="5.0499" y1="5.08" x2="10.16" y2="5.08" width="0.508" layer="1"/>
-<wire x1="10.16" y1="5.08" x2="11.43" y2="6.35" width="0.508" layer="1"/>
+<wire x1="11.43" y1="6.35" x2="10.16" y2="5.08" width="0.508" layer="1"/>
+<wire x1="5.0499" y1="5.08" x2="6.35" y2="5.08" width="0.508" layer="1"/>
+<via x="6.35" y="5.08" extent="1-16" drill="0.381"/>
+<wire x1="6.35" y1="5.08" x2="2.54" y2="5.08" width="0.508" layer="16"/>
+<wire x1="2.54" y1="5.08" x2="1.27" y2="6.35" width="0.508" layer="16"/>
+<wire x1="10.16" y1="5.08" x2="6.35" y2="5.08" width="0.508" layer="1"/>
 </signal>
 <signal name="MISO">
 <contactref element="U1" pad="4"/>
 <contactref element="J1" pad="2"/>
-<via x="3.81" y="3.048" extent="1-16" drill="0.381"/>
+<via x="4.191" y="3.048" extent="1-16" drill="0.381"/>
 <wire x1="7.6501" y1="4.13" x2="8.697" y2="4.13" width="0.508" layer="1"/>
 <wire x1="8.697" y1="4.13" x2="8.89" y2="3.937" width="0.508" layer="1"/>
 <wire x1="8.89" y1="3.937" x2="8.89" y2="3.302" width="0.508" layer="1"/>
 <wire x1="8.89" y1="3.302" x2="8.636" y2="3.048" width="0.508" layer="1"/>
-<wire x1="8.636" y1="3.048" x2="3.81" y2="3.048" width="0.508" layer="1"/>
+<wire x1="8.636" y1="3.048" x2="4.191" y2="3.048" width="0.508" layer="1"/>
 <wire x1="1.27" y1="3.81" x2="2.032" y2="3.048" width="0.508" layer="16"/>
-<wire x1="2.032" y1="3.048" x2="3.81" y2="3.048" width="0.508" layer="16"/>
+<wire x1="2.032" y1="3.048" x2="4.191" y2="3.048" width="0.508" layer="16"/>
 </signal>
 </signals>
 </board>
