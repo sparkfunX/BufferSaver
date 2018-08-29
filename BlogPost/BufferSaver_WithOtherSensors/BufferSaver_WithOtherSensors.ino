@@ -1,3 +1,5 @@
+
+
 /*
  * Owen Lyke
  * August 2018
@@ -5,7 +7,7 @@
  * Of course you don't always want MOSI connected to MISO - that would prevent you from talking to other sensors!
  * That's why I included a CS pin for the buffer saver. When the CS pin is high the tri-state buffer is disabled.
  * This keeps the SPI bus available for other sensors! (But you can't add more LED strips cause they would need 
- * their own CS pin to receive unique data. Hey... there's an idea!
+ * their own CS pin to receive unique data. Hey... there's an idea!)
  * 
  * Free code! As long as it doesn't hurt anyone you can do with it whatever you like.
  */
@@ -16,6 +18,7 @@
 uint8_t data[4*(NUM_LEDS + 2)];
 
 #define BS_CS_PIN 0
+#define SENSOR_CS_PIN 1
 
 uint16_t count = 0;
 uint8_t ledCount = NUM_LEDS - 1;
@@ -32,21 +35,19 @@ void setup() {
   pinMode(BS_CS_PIN, OUTPUT);
   digitalWrite(BS_CS_PIN, LOW);
 
-  Serial.println("BufferSaver Problem Illustration");
+  pinMode(SENSOR_CS_PIN, OUTPUT);
+  digitalWrite(SENSOR_CS_PIN, HIGH);
+
+  Serial.println("BufferSaver with Other Sensors");
   Serial.println();
   
   Serial.println("- Connect an APA102 LED strip to the SPI port on your microcontroller");
-  Serial.println("- Use a jumper wire to jiggle the data on the MISO pin");
+  Serial.println("- Use a BufferSaver board with the CS pin connected to pin 0");
+  Serial.println("- Add another SPI sensor with the CS pin connected to pin 1");
 
   Serial.println();
-  Serial.println("You should be able to observe the output values on the LEDs changing without them being told to do so.");
-  Serial.println("This is because SPI.transfer() writes over the buffer that you provide.");
-
-  Serial.println();
-  Serial.println("If you connect the buffer saver in between the controller and the strip ");
-  Serial.println("and solder the 'always on' jumper) then the outgoing data will be sent ");
-  Serial.println("back into the controller, thereby preserving your buffer");
-
+  Serial.println("If the CS pin on the buffer saver is high then the other sensor is");
+  Serial.println("allowed to control the MISO line");
 
   setupData();  // Initialize the data that you want to send out
 
