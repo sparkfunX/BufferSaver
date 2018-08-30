@@ -3254,6 +3254,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <element name="U$13" library="buzzard_labels" package="ON10" value="" x="3.81" y="5.334" rot="R90"/>
 <element name="U$14" library="buzzard_labels" package="VIN_MAX_5V11" value="" x="2.413" y="11.43"/>
 <element name="U$3" library="buzzard_labels" package="VIN_MAX_5V11" value="" x="10.16" y="11.43" rot="MR0"/>
+<element name="U3" library="SparkFun-IC-Logic" package="SOT23-5" value="SN74AHC1G125" x="2.54" y="-21.59">
+<attribute name="PROD_ID" value="IC-11920" x="2.54" y="-21.59" size="1.778" layer="27" font="vector" ratio="15" display="off"/>
+</element>
 </elements>
 <signals>
 <signal name="GND">
@@ -3301,7 +3304,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <signal name="!CS">
 <contactref element="J1" pad="4"/>
 <contactref element="J2" pad="2"/>
-<contactref element="U1" pad="1"/>
 <wire x1="1.27" y1="8.89" x2="3.302" y2="8.89" width="0.508" layer="1"/>
 <wire x1="3.302" y1="8.89" x2="11.43" y2="8.89" width="0.508" layer="1"/>
 <contactref element="R1" pad="1"/>
@@ -3309,29 +3311,37 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="3.302" y1="4.9784" x2="3.302" y2="5.969" width="0.508" layer="1"/>
 <wire x1="3.302" y1="5.969" x2="3.302" y2="7.62" width="0.508" layer="1"/>
 <wire x1="3.302" y1="7.62" x2="3.302" y2="8.89" width="0.508" layer="1"/>
-<wire x1="5.0499" y1="6.03" x2="3.363" y2="6.03" width="0.508" layer="1"/>
 <wire x1="3.363" y1="6.03" x2="3.302" y2="5.969" width="0.508" layer="1"/>
 <wire x1="5.5" y1="7.62" x2="3.302" y2="7.62" width="0.508" layer="1"/>
+<contactref element="U1" pad="1"/>
+<contactref element="U3" pad="1"/>
+<wire x1="3.302" y1="4.9784" x2="1.59" y2="-22.8901" width="0" layer="19" extent="1-1"/>
+<wire x1="5.0499" y1="6.03" x2="5.5" y2="7.62" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="MOSI">
+<signal name="MOSI_IN">
 <contactref element="J1" pad="3"/>
-<contactref element="U1" pad="2"/>
-<contactref element="J2" pad="3"/>
-<wire x1="11.43" y1="6.35" x2="10.16" y2="5.08" width="0.508" layer="1"/>
-<wire x1="5.0499" y1="5.08" x2="6.35" y2="5.08" width="0.508" layer="1"/>
 <via x="6.35" y="5.08" extent="1-16" drill="0.381"/>
 <wire x1="6.35" y1="5.08" x2="2.54" y2="5.08" width="0.508" layer="16"/>
 <wire x1="2.54" y1="5.08" x2="1.27" y2="6.35" width="0.508" layer="16"/>
 <wire x1="10.16" y1="5.08" x2="6.35" y2="5.08" width="0.508" layer="1"/>
+<contactref element="U1" pad="2"/>
+<contactref element="U3" pad="2"/>
+<wire x1="2.54" y1="5.08" x2="2.54" y2="-22.8901" width="0" layer="19" extent="1-16"/>
+<wire x1="5.0499" y1="5.08" x2="6.35" y2="5.08" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="MISO">
-<contactref element="U1" pad="4"/>
 <contactref element="J1" pad="2"/>
 <via x="6.35" y="4.064" extent="1-16" drill="0.381"/>
 <wire x1="6.35" y1="4.064" x2="1.524" y2="4.064" width="0.508" layer="16"/>
 <wire x1="1.524" y1="4.064" x2="1.27" y2="3.81" width="0.508" layer="16"/>
-<wire x1="7.6501" y1="4.13" x2="6.416" y2="4.13" width="0.508" layer="1"/>
 <wire x1="6.416" y1="4.13" x2="6.35" y2="4.064" width="0.508" layer="1"/>
+<contactref element="U1" pad="4"/>
+<wire x1="6.416" y1="4.13" x2="7.6501" y2="4.13" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="MOSI_OUT">
+<contactref element="U3" pad="4"/>
+<contactref element="J2" pad="3"/>
+<wire x1="11.43" y1="6.35" x2="3.49" y2="-20.2899" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
