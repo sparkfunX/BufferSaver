@@ -11,7 +11,10 @@
  * 
  * Free code! As long as it doesn't hurt anyone you can do with it whatever you like.
  */
+#include "SparkFunLIS3DH.h"
 #include "SPI.h"
+
+LIS3DH SensorOne( SPI_MODE, 1 );
 
 #define BRIGHTNESS 10 /* valid [0, 31] */
 #define NUM_LEDS 9
@@ -23,8 +26,8 @@ uint8_t data[4*(NUM_LEDS + 2)];
 uint16_t count = 0;
 uint8_t ledCount = NUM_LEDS - 1;
 
-SPISettings mySPIsettings(10000000, MSBFIRST, SPI_MODE3);
-//SPISettings mySPIsettings(5000000, MSBFIRST, SPI_MODE3);      // Slower test for my Logic4
+//SPISettings mySPIsettings(10000000, MSBFIRST, SPI_MODE3);
+SPISettings mySPIsettings(10000000, MSBFIRST, SPI_MODE3);      // Slower test for my Logic4
 
 void setup() {
   SPI.begin();
@@ -33,10 +36,19 @@ void setup() {
   while(!Serial){};
 
   pinMode(BS_CS_PIN, OUTPUT);
-  digitalWrite(BS_CS_PIN, LOW);
+  digitalWrite(BS_CS_PIN, HIGH);
 
-  pinMode(SENSOR_CS_PIN, OUTPUT);
-  digitalWrite(SENSOR_CS_PIN, HIGH);
+  //Call .begin() to configure the IMUs
+  uint8_t returnData = 0;
+  returnData = SensorOne.begin();
+  if(( returnData != 0x00 )&&( returnData != 0xFF ))
+  {
+    Serial.println("Problem starting the sensor with CS @ Pin 10.");
+  }
+  else
+  {
+    Serial.println("Sensor with CS @ Pin 10 started.");
+  }
 
   Serial.println("BufferSaver with Other Sensors");
   Serial.println();
@@ -66,7 +78,7 @@ void loop() {
   // Now we will want to change the LED data  to make an animation of sorts
 
   delay(16);    // 60 Hz refresh... (ish - not accounting for other operations)
-  Serial.println(millis());
+//  Serial.println(millis());
 
   // Once per second advance the LED
   if(++count > 60)
@@ -78,6 +90,11 @@ void loop() {
       ledCount = 0; 
     }
     setLED(ledCount, 255, 0, 0);    // Set the current LED (after increment)
+  }
+
+  if(!(count % 10))
+  {
+    printAccData();
   }
   
   sendData();   // So, when you send the data with SPI.transfer() the data array will be overwritten and you can't be sure what will come out next!
@@ -106,7 +123,9 @@ void setupData( void )
 void sendData( void )
 {
 //  SPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE3));
-
+  kickSPI();
+  digitalWrite(BS_CS_PIN, LOW);
+//  delay(1);
   SPI.beginTransaction(mySPIsettings);
 
   SPI.transfer(data, 4*(NUM_LEDS+2));
@@ -115,6 +134,8 @@ void sendData( void )
     SPI.transfer(0x00);  // You need to provide extra clock cycles to APA102
   }
   SPI.endTransaction();
+  digitalWrite(BS_CS_PIN, HIGH);
+//  delay(1);
 }
 
 void setLED(uint16_t led, uint8_t r, uint8_t g, uint8_t b)
@@ -124,10 +145,10 @@ void setLED(uint16_t led, uint8_t r, uint8_t g, uint8_t b)
     return;
   }
   
-  data[4*(led + 0) + 0] = (0xE0 | (0x1F & BRIGHTNESS));
-  data[4*(led + 0) + 1] = b;
-  data[4*(led + 0) + 2] = g;
-  data[4*(led + 0) + 3] = r;
+  data[4*(led + 1) + 0] = (0xE0 | (0x1F & BRIGHTNESS));
+  data[4*(led + 1) + 1] = b;
+  data[4*(led + 1) + 2] = g;
+  data[4*(led + 1) + 3] = r;
 }
 
 void kickSPI( void )
@@ -139,6 +160,24 @@ void kickSPI( void )
     SPI.transfer(0x00);  // You need to provide extra clock cycles to APA102
   }
   SPI.endTransaction();
+}
+
+void printAccData( void )
+{
+  //Get all parameters
+  Serial.print("\nAccelerometer:\n");
+  Serial.print(" X1 = ");
+  Serial.println(SensorOne.readFloatAccelX(), 4);
+  Serial.print(" Y1 = ");
+  Serial.println(SensorOne.readFloatAccelY(), 4);
+  Serial.print(" Z1 = ");
+  Serial.println(SensorOne.readFloatAccelZ(), 4);
+  
+  Serial.print("\nSensorOne Bus Errors Reported:\n");
+  Serial.print(" All '1's = ");
+  Serial.println(SensorOne.allOnesCounter);
+  Serial.print(" Non-success = ");
+  Serial.println(SensorOne.nonSuccessCounter);
 }
 
 
