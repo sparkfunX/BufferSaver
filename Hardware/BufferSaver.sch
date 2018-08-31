@@ -1619,6 +1619,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <sheet>
 <plain>
 <text x="68.58" y="-81.28" size="2.54" layer="97">Owen Lyke</text>
+<text x="139.7" y="-83.82" size="2.54" layer="94">X01</text>
 </plain>
 <instances>
 <instance part="J1" gate="G$1" x="-43.18" y="0"/>
