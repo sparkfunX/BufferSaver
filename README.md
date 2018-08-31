@@ -1,7 +1,7 @@
 SparkX SPI Buffer Saver
 ========================================
 
-![SPI Buffer Saver](https://cdn.sparkfun.com/assets/parts/1/3/0/1/3/14767-Qwiic_Pressure_Sensor_-_LPS25HB-05.jpg)
+![SPI Buffer Saver](https://cdn.sparkfun.com/assets/parts/1/3/2/7/3/14973-SPI_Buffer_Saver-01.jpg)
 
 [*SPI Buffer Saver (SPX-14973)*](https://www.sparkfun.com/products/14973)
 
